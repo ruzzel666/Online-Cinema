@@ -199,10 +199,25 @@ body {
   margin-bottom: 40px;
   background: rgba(36, 36, 36, 0.18);
   border-radius: 10px;
+  overflow-x: auto;
+}
+
+.scheme::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scheme::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.scheme::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
 }
 
 .scheme-svg {
   max-width: 1170px;
+  min-width: 800px;
 }
 
 .scheme path:not(.light) {
@@ -267,6 +282,8 @@ body {
 }
 
 .button {
+  border: none;
+  cursor: pointer;
   border-radius: 5px;
   padding-block: 24px;
   padding-inline: 52px;
@@ -276,14 +293,38 @@ body {
   font-size: 18px;
   line-height: 21px;
   text-decoration: none;
+  transition: background-color 0.2s, opacity 0.2s;
+  display: inline-block;
+}
+
+.button:hover {
+  background: #e67d02;
+}
+
+.buttons-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.button-clear {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.button-clear:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.button.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 @media (max-width: 1200px) {
   .container {
     max-width: 960px;
-  }
-  .scheme-cinema {
-    width: 100%;
   }
 }
 
@@ -314,6 +355,17 @@ body {
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding-top: 30px;
+  }
+  .film {
+    margin-top: 30px;
+  }
+  .session {
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
   .container {
     max-width: 560px;
   }
@@ -321,16 +373,17 @@ body {
     position: absolute;
     left: 0;
     top: 40px;
-    padding-left: 20px;
-    margin-left: 20px;
+    padding: 20px;
+    margin-left: 0;
     flex-direction: column;
     background-color: #621402;
     z-index: 9;
     border-radius: 10px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-100%);
+    transform: translateY(-20%);
     transition: opacity 0.5s, transform 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   }
   .menu-item:not(:last-child) {
     margin-bottom: 10px;
@@ -363,12 +416,18 @@ body {
 }
 
 @media (max-width: 576px) {
+  .user span {
+    display: none;
+  }
   .container {
     width: 95%;
   }
   .film-title {
     font-size: 24px;
     line-height: 1.2;
+  }
+  .film-description {
+    font-size: 14px;
   }
   .film-details {
     flex-direction: column;
@@ -403,10 +462,15 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
-  .button-pay {
+  .buttons-group {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  .button-pay, .button-clear {
     width: 100%;
     text-align: center;
-    margin-top: 20px;
   }
   .legend {
     flex-direction: column;
